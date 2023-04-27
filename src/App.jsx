@@ -2,6 +2,8 @@ import Card from "./components/Card";
 import Drawer from "./components/Drawer";
 import Header from "./components/Header";
 
+import { sneakers } from "./data";
+
 function App() {
     return (
         <div className="wrapper clear">
@@ -17,15 +19,11 @@ function App() {
                 </div>
 
                 <div className="d-flex justify-between flex-wrap">
-                    <Card />
-                    <Card />
-                    <Card />
-                    <Card />
-                    <Card />
-                    <Card />
-                    <Card />
-                    <Card />
-                    
+                    {sneakers.map(item => (
+                        <Card 
+                            {...item}
+                        />
+                    ))}
                 </div>
             </div>
         </div>
