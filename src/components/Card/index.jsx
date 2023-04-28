@@ -1,11 +1,23 @@
 import React from "react";
 import "./Card.scss";
 
-function Card({ title, imageUrl, price }) {
+function Card({ title, imageUrl, price, onFavorite, onPlus }) {
+    const [isAdded, setIsAdded] = React.useState(false);
+    const [isFavorite, setIsFavorite] = React.useState(false);
+    
+    const addToCart = () => {
+        onPlus({ title, imageUrl, price });
+        setIsAdded(!isAdded);
+    }
+
+    const onClickFavorite = () => {
+        setIsFavorite(!isFavorite);
+    }
+
     return (
         <div className="card">
-            <div className="favorite">
-                <img src="/images/Heart-unliked.svg" alt="Не нравится" />
+            <div className="favorite" onClick={onClickFavorite}>
+                <img  src={isFavorite ? "/images/Heart-like.svg" : "/images/Heart-unliked.svg"} alt="Не нравится" />
             </div>
             <img
                 className="sneakers_img"
@@ -20,14 +32,12 @@ function Card({ title, imageUrl, price }) {
                     <span>Цена:</span>
                     <b>{price} руб.</b>
                 </div>
-                <button className="button cu-p" >
-                    <img
-                        src="./images/Plus.svg"
-                        alt="Добавить"
-                        width={11}
-                        height={11}
-                    />
-                </button>
+                <img 
+                    onClick={addToCart}
+                    className="cu-p" 
+                    src={isAdded ? "./images/Added.svg" : "./images/Plus.svg"} 
+                    alt="Добавить" 
+                />
             </div>
         </div>
     );
